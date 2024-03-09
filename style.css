@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=Varela+Round&display=swap');
+body{
+    background-color: antiquewhite;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    font-family: 'Ubuntu', sans-serif;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    list-style-type: none;
+    background-color: black;
+    color: white;
+}
+nav ul li{
+    padding: 0 25px;
+}
+.brand img{
+    height: 40px;
+}
+.brand{
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.3rem;
+}
+.container{
+    min-height: 70vh;
+    background-color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+  font-style: normal;
+    color: white;
+    display: flex;
+    margin: 25px auto;
+    width: 70%;
+    border-radius: 12px;
+    padding: 34px;
+    background-image: url(../img/bg1.jpg);
+}
+.bottom{
+    position: sticky;
+    bottom: 0;
+    height: 130px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#myProgressbar{
+    width: 80vw;
+    cursor: pointer;
+}
+.icons{
+    margin: 15px 0;
+}
+.icons i{
+    cursor: pointer;
+}
+.icons{
+    color: white;
+}
+.songInfo img{
+   opacity: 0;
+   transition: opacity 0.4s ease-in;
+}
+.songInfo{
+    color: white;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    margin: 0px 10px;
+}
+.songItem{
+    background-color: white;
+    width: 70%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin: 34px 0;
+    padding: 10px 0;
+}
+.songItem img{
+height: 50px;
+margin: 0 30px;
+border-radius: 100px;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.songItem i {
+    cursor: pointer;
+    margin: 0px 5px;
+}
+.sound-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#myvolumeprogress{
+   display: none;
+    transition: all 1s ease-in;
+    cursor: pointer;
+}
+#myvolumeprogress.active{
+    display: inline;
+}
+.volume-icon{
+    color: #fff;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+}
+.volume-percent{
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+  font-style: normal;
+  font-size: 0.8rem;
+  position: absolute;
+  margin-left: 0.1rem 
+rem
+;
+}
+.duration{
+    position: absolute;
+    right: 7.5%;
+    top: 5.3%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.8rem;
+}
+.currentduration{
+    position: absolute;
+    font-size: 0.8rem;
+    left: 7.5%;
+    top: 5.3%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
