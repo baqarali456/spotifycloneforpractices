@@ -1,9 +1,25 @@
-let audioElement = new Audio('songs/1.mp3');
+let index = Math.floor(Math.random() * 5 + 1);
+let audioElement = new Audio(`songs/${index}.mp3`);
+
 const myProgressbar = document.getElementById('myProgressbar');
 const volumeid = document.getElementById('volume');
 const myvolumeprogress = document.getElementById('myvolumeprogress');
 const volume_percent = document.querySelector('.volume-percent');
+const songItems = document.querySelectorAll('.songItem')
 let showVolpercent = false;
+
+let songs = [
+    { songname: "songs/1.mp3", imagePath: "covers/0.jpg" },
+    { songname: "songs/2.mp3", imagePath: "covers/1.jpg" },
+    { songname: "songs/3.mp3", imagePath: "covers/2.jpg" },
+    { songname: "songs/4.mp3", imagePath: "covers/3.jpg" },
+    { songname: "songs/5.mp3", imagePath: "covers/4.jpg" },
+]
+
+songItems.forEach((element, i) => {
+    element.querySelector('img').src = songs[i].imagePath;
+    element.querySelector('.songName').innerText = songs[i].songname;
+});
 
 
 const masterplay = document.getElementById('masterplay');
@@ -13,8 +29,7 @@ masterplay.addEventListener('click', () => {
         masterplay.classList.add('fa-pause-circle');
         masterplay.classList.remove('fa-play-circle');
         gif.style.opacity = 1;
-        document.querySelector('.duration').innerText = ((audioElement.duration / 60).toString().slice(0,4)) ;
-        document.querySelector('.currentduration').innerText = (audioElement.currentTime / 60).toString().slice(0,4)<0.01?"0:00":(audioElement.currentTime / 60).toString().slice(0,4)
+        setDuration();
     }
     else {
         audioElement.pause();
@@ -34,10 +49,8 @@ audioElement.addEventListener("timeupdate", () => {
     let currentTime = audioElement.currentTime;
     let progress = parseInt((currentTime / duration) * 100);
     myProgressbar.value = progress;
-  
-    document.querySelector('.duration').innerText = ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0,4)<0.01?"0:00":((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0,4) ;
-    document.querySelector('.currentduration').innerText = (audioElement.currentTime / 60).toString().slice(0,4)<0.01?"0:00":(audioElement.currentTime / 60).toString().slice(0,4)
-    // The duration variable now holds the duration (in seconds) of the audio clip
+
+    setDuration()
 });
 
 myProgressbar.addEventListener('change', () => {
@@ -45,10 +58,7 @@ myProgressbar.addEventListener('change', () => {
     audioElement.play();
     masterplay.classList.add('fa-pause-circle');
     masterplay.classList.remove('fa-play-circle');
-    
-    document.querySelector('.duration').innerText = ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0,4)<0.01?"0:00":((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0,4);
-
-    document.querySelector('.currentduration').innerText = (audioElement.currentTime / 60).toString().slice(0,4)<0.01?"0:00":(audioElement.currentTime / 60).toString().slice(0,4)
+    setDuration()
 });
 
 volumeid.addEventListener('click', () => {
@@ -69,8 +79,84 @@ myvolumeprogress.addEventListener('change', () => {
         volumeid.classList.remove('fa-volume-xmark');
         volumeid.classList.add('fa-volume-high')
     }
-    
-})
+
+});
+
+
+document.getElementById('forward').addEventListener('click', () => {
+    if (index < songs.length - 1) {
+        index++;
+    }
+    else {
+        index = 1;   
+    }
+    audioElement.pause()
+    audioElement.src=`songs/${index}.mp3`
+    audioElement.play();
+    masterplay.classList.add('fa-pause-circle');
+    masterplay.classList.remove('fa-play-circle');
+    setDuration()
+});
+
+document.getElementById('previous').addEventListener('click', () => {
+    if (index < 1) {
+        index--;  
+    }
+    else {
+        index = songs.length - 1;
+    }     
+        audioElement.pause()
+        audioElement.src=`songs/${index}.mp3`
+        audioElement.play();
+        masterplay.classList.add('fa-pause-circle');
+        masterplay.classList.remove('fa-play-circle');
+        setDuration()
+});
+
+document.querySelectorAll('.songItemPlay').forEach((ele => {
+    ele.addEventListener('click', (e) => {
+        if (e.target.classList.contains('fa-play-circle')) {
+            updateicons();
+            ele.classList.add('fa-pause-circle');
+            ele.classList.remove('fa-play-circle');
+            masterplay.classList.add('fa-pause-circle');
+            masterplay.classList.remove('fa-play-circle');
+            let currentsrc = ele.parentElement.parentElement.querySelector('.songName').innerText;
+            console.log(src);
+            if(audioElement.currentTime > 0){
+                audioElement.pause()
+            }
+            audioElement.src=`${currentsrc}`;
+            audioElement.play();
+           
+            setDuration()
+            
+        }
+        else if (e.target.classList.contains('fa-pause-circle')) {
+            updateicons();
+            ele.classList.remove('fa-pause-circle');
+            ele.classList.add('fa-play-circle');
+            masterplay.classList.remove('fa-pause-circle');
+            masterplay.classList.add('fa-play-circle');
+            audioElement.pause()
+        }
+
+    })
+}));
+
+function updateicons() {
+    document.querySelectorAll('.songItemPlay').forEach(function (val) {
+        val.classList.remove('fa-pause-circle');
+        val.classList.add('fa-play-circle');
+    })
+}
+
+function setDuration(){
+     // set total duration of song
+    document.querySelector('.duration').innerText = ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0, 4) < 0.01 ? "0:00" : ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0, 4);
+    // set current Time of song
+    document.querySelector('.currentduration').innerText = (audioElement.currentTime / 60).toString().slice(0, 4) < 0.01 ? "0:00" : (audioElement.currentTime / 60).toString().slice(0, 4);
+}
 
 
 
