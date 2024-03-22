@@ -8,6 +8,11 @@ const volume_percent = document.querySelector('.volume-percent');
 const songItems = document.querySelectorAll('.songItem')
 let showVolpercent = false;
 
+
+
+
+
+
 let songs = [
     { songname: "songs/1.mp3", imagePath: "covers/0.jpg" },
     { songname: "songs/2.mp3", imagePath: "covers/1.jpg" },
@@ -21,11 +26,23 @@ songItems.forEach((element, i) => {
     element.querySelector('.songName').innerText = songs[i].songname;
 });
 
+function clickMainPlayButtonEffect_OnSongsListBtn(){
+    let songName = document.querySelectorAll('.songName');
+songName.forEach(ele=>{
+    if(ele.innerText === audioElement.src.slice(22)){
+        ele.nextElementSibling.querySelector('i').classList.remove('fa-play-circle');
+        ele.nextElementSibling.querySelector('i').classList.add('fa-pause-circle');
+    }
+    })
+}
+    
+
 
 const masterplay = document.getElementById('masterplay');
 masterplay.addEventListener('click', () => {
     if (audioElement.paused || audioElement.currentTime <= 0) {
         audioElement.play();
+        clickMainPlayButtonEffect_OnSongsListBtn() 
         masterplay.classList.add('fa-pause-circle');
         masterplay.classList.remove('fa-play-circle');
         gif.style.opacity = 1;
@@ -33,6 +50,7 @@ masterplay.addEventListener('click', () => {
     }
     else {
         audioElement.pause();
+        updateicons();
         masterplay.classList.add('fa-play-circle');
         masterplay.classList.remove('fa-pause-circle');
         gif.style.opacity = 0;
@@ -91,7 +109,9 @@ document.getElementById('forward').addEventListener('click', () => {
         index = 1;   
     }
     audioElement.pause()
+    updateicons();
     audioElement.src=`songs/${index}.mp3`
+    clickMainPlayButtonEffect_OnSongsListBtn() 
     audioElement.play();
     masterplay.classList.add('fa-pause-circle');
     masterplay.classList.remove('fa-play-circle');
@@ -99,14 +119,18 @@ document.getElementById('forward').addEventListener('click', () => {
 });
 
 document.getElementById('previous').addEventListener('click', () => {
-    if (index < 1) {
+    if (index > 1) {
         index--;  
     }
     else {
         index = songs.length - 1;
     }     
-        audioElement.pause()
+        audioElement.pause();
         audioElement.src=`songs/${index}.mp3`
+        console.log(index);
+        
+        updateicons();
+        clickMainPlayButtonEffect_OnSongsListBtn() 
         audioElement.play();
         masterplay.classList.add('fa-pause-circle');
         masterplay.classList.remove('fa-play-circle');
@@ -121,8 +145,10 @@ document.querySelectorAll('.songItemPlay').forEach((ele => {
             ele.classList.remove('fa-play-circle');
             masterplay.classList.add('fa-pause-circle');
             masterplay.classList.remove('fa-play-circle');
-            let currentsrc = ele.parentElement.parentElement.querySelector('.songName').innerText;
-            console.log(src);
+             currentsrc = ele.parentElement.parentElement.querySelector('.songName').innerText;
+           
+             
+    
             if(audioElement.currentTime > 0){
                 audioElement.pause()
             }
