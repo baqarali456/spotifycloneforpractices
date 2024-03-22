@@ -7,6 +7,10 @@ const myvolumeprogress = document.getElementById('myvolumeprogress');
 const volume_percent = document.querySelector('.volume-percent');
 const songItems = document.querySelectorAll('.songItem')
 let showVolpercent = false;
+let getLocal = 
+
+volume_percent.innerText = `${showVolpercent ? JSON.parse(localStorage.getItem('volume')) + " %" : ""}`;
+myvolumeprogress.value = JSON.parse(localStorage.getItem('volume'));
 
 let songs = [
     { songname: "songs/1.mp3", imagePath: "covers/0.jpg" },
@@ -76,6 +80,7 @@ volumeid.addEventListener('click', () => {
 
 myvolumeprogress.addEventListener('change', () => {
     audioElement.volume = myvolumeprogress.value / 100;
+    localStorage.setItem("volume",JSON.stringify(myvolumeprogress.value));
     volume_percent.innerText = `${myvolumeprogress.value}%`
     if (audioElement.volume == 0) {
         volumeid.classList.add('fa-volume-xmark');
