@@ -67,6 +67,10 @@ nav ul li{
 .icons{
     color: white;
 }
+.songlist{
+    display: flex;
+    flex-direction: column;
+}
 .songInfo img{
    opacity: 0;
    transition: opacity 0.4s ease-in;

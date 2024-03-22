@@ -8,11 +8,6 @@ const volume_percent = document.querySelector('.volume-percent');
 const songItems = document.querySelectorAll('.songItem')
 let showVolpercent = false;
 
-
-
-
-
-
 let songs = [
     { songname: "songs/1.mp3", imagePath: "covers/0.jpg" },
     { songname: "songs/2.mp3", imagePath: "covers/1.jpg" },
@@ -36,8 +31,6 @@ songName.forEach(ele=>{
     })
 }
     
-
-
 const masterplay = document.getElementById('masterplay');
 masterplay.addEventListener('click', () => {
     if (audioElement.paused || audioElement.currentTime <= 0) {
@@ -57,10 +50,6 @@ masterplay.addEventListener('click', () => {
     }
 
 })
-
-
-
-
 
 audioElement.addEventListener("timeupdate", () => {
     let duration = audioElement.duration;
@@ -86,7 +75,6 @@ volumeid.addEventListener('click', () => {
 })
 
 myvolumeprogress.addEventListener('change', () => {
-    console.log(myProgressbar.value);
     audioElement.volume = myvolumeprogress.value / 100;
     volume_percent.innerText = `${myvolumeprogress.value}%`
     if (audioElement.volume == 0) {
