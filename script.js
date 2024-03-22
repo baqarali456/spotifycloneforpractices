@@ -7,7 +7,6 @@ const myvolumeprogress = document.getElementById('myvolumeprogress');
 const volume_percent = document.querySelector('.volume-percent');
 const songItems = document.querySelectorAll('.songItem')
 let showVolpercent = false;
-let getLocal = 
 
 volume_percent.innerText = `${showVolpercent ? JSON.parse(localStorage.getItem('volume')) + " %" : ""}`;
 myvolumeprogress.value = JSON.parse(localStorage.getItem('volume'));
