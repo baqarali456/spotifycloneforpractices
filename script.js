@@ -39,7 +39,7 @@ masterplay.addEventListener('click', () => {
         masterplay.classList.add('fa-pause-circle');
         masterplay.classList.remove('fa-play-circle');
         gif.style.opacity = 1;
-        setDuration();
+        setDurationofSong();
     }
     else {
         audioElement.pause();
@@ -57,7 +57,7 @@ audioElement.addEventListener("timeupdate", () => {
     let progress = parseInt((currentTime / duration) * 100);
     myProgressbar.value = progress;
 
-    setDuration()
+    setDurationofSong()
 });
 
 myProgressbar.addEventListener('change', () => {
@@ -65,7 +65,7 @@ myProgressbar.addEventListener('change', () => {
     audioElement.play();
     masterplay.classList.add('fa-pause-circle');
     masterplay.classList.remove('fa-play-circle');
-    setDuration()
+    setDurationofSong()
 });
 
 volumeid.addEventListener('click', () => {
@@ -103,7 +103,7 @@ document.getElementById('forward').addEventListener('click', () => {
     audioElement.play();
     masterplay.classList.add('fa-pause-circle');
     masterplay.classList.remove('fa-play-circle');
-    setDuration()
+    setDurationofSong()
 });
 
 document.getElementById('previous').addEventListener('click', () => {
@@ -122,7 +122,7 @@ document.getElementById('previous').addEventListener('click', () => {
         audioElement.play();
         masterplay.classList.add('fa-pause-circle');
         masterplay.classList.remove('fa-play-circle');
-        setDuration()
+        setDurationofSong()
 });
 
 document.querySelectorAll('.songItemPlay').forEach((ele => {
@@ -143,7 +143,7 @@ document.querySelectorAll('.songItemPlay').forEach((ele => {
             audioElement.src=`${currentsrc}`;
             audioElement.play();
            
-            setDuration()
+            setDurationofSong()
             
         }
         else if (e.target.classList.contains('fa-pause-circle')) {
@@ -165,7 +165,7 @@ function updateicons() {
     })
 }
 
-function setDuration(){
+function setDurationofSong(){
      // set total duration of song
     document.querySelector('.duration').innerText = ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0, 4) < 0.01 ? "0:00" : ((audioElement.duration / 60) - (audioElement.currentTime / 60)).toString().slice(0, 4);
     // set current Time of song
