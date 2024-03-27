@@ -2,14 +2,21 @@ let index = Math.floor(Math.random() * 5 + 1);
 let audioElement = new Audio(`songs/${index}.mp3`);
 
 const myProgressbar = document.getElementById('myProgressbar');
+
 const volumeid = document.getElementById('volume');
 const myvolumeprogress = document.getElementById('myvolumeprogress');
 const volume_percent = document.querySelector('.volume-percent');
 const songItems = document.querySelectorAll('.songItem')
+
+
+
+
+
 let showVolpercent = false;
 
 volume_percent.innerText = `${showVolpercent ? JSON.parse(localStorage.getItem('volume')) + " %" : ""}`;
 myvolumeprogress.value = JSON.parse(localStorage.getItem('volume'));
+audioElement.volume = JSON.parse(localStorage.getItem('volume')) / 100
 
 let songs = [
     { songname: "songs/1.mp3", imagePath: "covers/0.jpg" },
@@ -175,6 +182,9 @@ function setDurationofSong(){
     // set current Time of song
     document.querySelector('.currentduration').innerText = (audioElement.currentTime / 60).toString().slice(0, 4) < 0.01 ? "0:00" : (audioElement.currentTime / 60).toString().slice(0, 4);
 }
+
+
+
 
 
 
